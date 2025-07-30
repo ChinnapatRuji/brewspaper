@@ -1,9 +1,6 @@
 {
   "CNN": {
     "rss": [
-      "http://rss.cnn.com/rss/money_news_companies.rss",
-      "http://rss.cnn.com/rss/money_news_economy.rss",
-      "http://rss.cnn.com/rss/money_markets.rss"
     ]
   },
   "BBC": {
