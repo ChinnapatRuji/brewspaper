@@ -8,16 +8,6 @@ def main():
         page_icon = ":newspaper:"
     )
     st.header("Get any news topic you want")
-    # if st.button("Load News"):
-    #     with st.spinner("Loading..."):
-    #         if "vector_db" in st.session_state:
-    #             del st.session_state["vector_db"]
-    #         try:
-    #             df = af.get_news("feeds.json")
-    #             st.session_state.vector_db = af.get_vector(df)
-    #             st.success("Loading Complete")
-    #         except:
-    #             st.write("Loading Failed. Try Again") 
     query = st.text_input("News topic")
     if st.button("Enter"):
         try:
