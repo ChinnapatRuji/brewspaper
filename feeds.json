@@ -1,9 +1,6 @@
 {
   "CNN": {
     "rss": [
-      "http://rss.cnn.com/rss/money_news_companies.rss",
-      "http://rss.cnn.com/rss/money_news_economy.rss",
-      "http://rss.cnn.com/rss/money_markets.rss"
     ]
   },
   "BBC": {
@@ -22,7 +19,10 @@
   "Straits Times": {
     "rss": [
       "https://www.straitstimes.com/news/world/rss.xml",
-      "https://www.straitstimes.com/news/business/rss.xml"
+      "https://www.straitstimes.com/news/business/rss.xml",
+      "https://www.straitstimes.com/news/singapore/rss.xml",
+      "https://www.straitstimes.com/news/tech/rss.xml",
+      "https://www.straitstimes.com/news/asia/rss.xml"
     ]
   },
   "NewYork Times": {
