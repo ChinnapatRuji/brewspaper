@@ -10,9 +10,10 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-CHROMA_PATH = "chroma"
+CHROMA_PATH = "Chroma"
 embedding_model_name = os.getenv("HF_EMBEDDING_MODEL")
 embedding_model = HuggingFaceEmbeddings(model_name=embedding_model_name)
+gemini_api_key = os.getenv("GEMINI_API_KEY")
 
 def get_news(file):
     with open(file, 'r') as f:
@@ -48,18 +49,25 @@ def get_news(file):
     df = pd.DataFrame(entries)
     return df
 
-def get_vector(df):
+def get_vector_chroma(df):
     chunks = [
         f"Source: {row['source']}\nTitle: {row['title']}\nPublished: {row['published']}\nSummary: {row['summary']}\nContent: {row['content']}\nLink: {row['link']}"
         for _, row in df.iterrows()
     ]
-    vector_db = Chroma.from_texts(
+    Chroma.from_texts(
         texts=chunks,
         embedding=embedding_model,
+        persist_directory=CHROMA_PATH,
+        collection_name="news_collection"
+    )
+
+def get_vector():
+    vector_db = Chroma(
+        persist_directory=CHROMA_PATH,
+        embedding_function=embedding_model,
         collection_name="news_collection"
     )
     return vector_db
-
 
 def get_context(vector_db, query, k=30):
     docs = vector_db.similarity_search(query, k=k)
@@ -77,22 +85,17 @@ def ask_gemini_pick_best_news(context, query):
     )
 
     prompt += (
-        "From all these articles, choose the ONLY top 3 most relevant news article with criteria such as popularity,"
-        "connection to topic, significance, unbias. I want ONLY the most recent news\n"
-    )
-    prompt += (
-        "Respond with:\n"
-        "- A relevance rating for articles (1-5) with source names, news article title, "
-        "quick summary and its relevance to topic strictly in the following format\n"
-        "\nFormat:\n"
-        "1. SourceName - Title\n'Rating:' rating\n Relevance: \n Published date:\n Link: \n"
-        "1. SourceName - Title\n'Rating:' rating\n Relevance: \n Published date:\n Link: \n"
-        "1. SourceName - Title\n'Rating:' rating\n Relevance: \n Published date:\n Link: \n"
-        "Note: ONLY shows 3 news article\n"
-        "if not news is relevant. Say that no news is relevant to the topic"
+        f"From all these articles, choose the ONLY TOP 3 most relevant news article with criteria such as popularity,"
+        f"connection to topic, significance, unbias. I want ONLY the most recent news\n"
+        f"Respond with:\n"
+        f"- A relevance rating for articles (1-5) with source names, news article title, "
+        f"quick summary and its relevance to topic strictly in the following format\n"
+        f"\nFormat:\n"
+        f"1. SourceName - Title\nRating: rating\n Relevance: \n Published date:\n Link: \n"
+        f"if not news is relevant. Say that no news is relevant to the topic"
     )
 
-    genai.configure(api_key="AIzaSyBiJbkFABKwtZ-RZJmudvH9O2YfoZDe7pA")
+    genai.configure(api_key=gemini_api_key)
     model = genai.GenerativeModel('gemini-2.0-flash')
     response = model.generate_content(prompt)
     return response.text
