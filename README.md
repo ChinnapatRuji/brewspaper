@@ -13,17 +13,17 @@ Relevant articles are retrieved and then passed to Gemini
 Gemini selects the top 3 most relevant news pieces and summarizes them
 
 # 🛠️ Setup
-1. Clone the repository
-git clone https://github.com/ChinnapatRuji/brewspaper.git
+1. Clone the repository  
+`git clone https://github.com/ChinnapatRuji/brewspaper.git`
 
-2. Set up the Environment File  
-Copy the example file and fill in your details:
-cp .env.example .env
+3. Set up the Environment File  
+Copy the example file and fill in your details:  
+`cp .env.example .env`  
 Then open `.env` and add your API keys or model names.
 
-3. Download Dependencies  
-Ensure you have Python 3.9+ installed.  
-All required Python packages are listed in 'requirements.txt'. To install them, run: pip install -r requirements.txt
+5. Download Dependencies  
+Ensure you have Python 3.9+ installed. All required Python packages are listed in 'requirements.txt'.  
+To install them, run: `pip install -r requirements.txt`
 
-4. Run the streamlit app:
-streamlit run app.py
+7. Run the streamlit app:  
+`streamlit run app.py`
