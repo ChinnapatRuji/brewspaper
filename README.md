@@ -16,14 +16,16 @@ Gemini selects the top 3 most relevant news pieces and summarizes them
 1. Clone the repository  
 `git clone https://github.com/ChinnapatRuji/brewspaper.git`
 
-3. Set up the Environment File  
+2. Set up the Environment File  
 Copy the example file and fill in your details:  
 `cp .env.example .env`  
 Then open `.env` and add your API keys or model names.
 
-5. Download Dependencies  
+3. Download Dependencies  
 Ensure you have Python 3.9+ installed. All required Python packages are listed in 'requirements.txt'.  
 To install them, run: `pip install -r requirements.txt`
 
-7. Run the streamlit app:  
+4. Run `python preload_news.py` before opening the streamlit app to fetch latest news
+
+5. Run the streamlit app:  
 `streamlit run app.py`
