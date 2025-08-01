@@ -1,0 +1,15 @@
+feedparser
+pandas
+python-dotenv
+newspaper3k
+google-generativeai
+langchain
+langchain-community
+langchain_huggingface
+langchain_chroma
+sentence-transformers
+chromadb
+huggingface-hub
+transformers
+streamlit
+lxml_html_clean

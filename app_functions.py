@@ -89,7 +89,7 @@ def ask_gemini_pick_best_news(context, query):
         f"connection to topic, significance, unbias. I want ONLY the most recent news\n"
         f"Respond with:\n"
         f"- A relevance rating for articles (1-5) with source names, news article title, "
-        f"quick summary and its relevance to topic strictly in the following format\n"
+        f"quick summary and its relevance to topic ONLY with the following format\n"
         f"\nFormat:\n"
         f"1. SourceName - Title\nRating: rating\n Relevance: \n Published date:\n Link: \n"
         f"if not news is relevant. Say that no news is relevant to the topic"
