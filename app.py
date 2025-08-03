@@ -16,7 +16,9 @@ def main():
                 context = af.get_context(vector_db, query)
                 st.subheader("News")
                 ans = af.ask_gemini_pick_best_news(context, query)
-                st.text(ans)
+                articles = ans.split("\n\n")  # Split articles by double newline
+                for article in articles:
+                    st.markdown(article.strip(), unsafe_allow_html=True)
         except:
             st.error("Error")
 
